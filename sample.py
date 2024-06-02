@@ -41,6 +41,9 @@ def start_session_app() -> None:
     """
     # Generate a unique session ID (room code)
     session_id: str = generate_room_code()
+    
+    # Get the client ID of the requester
+    client_id: str = request.sid
 
     if "ERROR" in session_id:
         # An error occurred during room code generation
@@ -51,9 +54,6 @@ def start_session_app() -> None:
             room=client_id
         )
     else:
-        # Get the client ID of the requester
-        client_id: str = request.sid
-
         # Join the session
         start_session(session_id, client_id, 'local')
 
